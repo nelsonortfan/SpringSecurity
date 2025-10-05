@@ -14,7 +14,7 @@ public class ProjectSecurityConfig {
         http.authorizeHttpRequests( (requests) -> requests
                 .requestMatchers("/myAccount", "myBalance", "myCards", "myLoans").authenticated()
                 .requestMatchers("/notices", "/contact", "/error").permitAll())
-                .formLogin(Customizer.withDefaults())
+                .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.disable())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
     }

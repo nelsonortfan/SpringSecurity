@@ -30,7 +30,7 @@ public class ProjectSecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(){
         UserDetails user = User.withUsername("user").password("{noop}12345").authorities("read").build();
-        UserDetails admin = User.withUsername("admin").password("{bcrypt}$2a$12$tIygJdiw7miv8nzb.tYQB.lDWpQSAJi2VHM.jRrXIpYHQrchkpSmm").authorities("admin").build();
+        UserDetails admin = User.withUsername("admin").password("{bcrypt}$2a$12$TGmoOtaaV3NE1XrZj7xPlec1shIkBc/1UxzUSJVrYmwjHdZLjy.qa").authorities("admin").build();
         return new InMemoryUserDetailsManager(user, admin);
     }
 

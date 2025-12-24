@@ -24,6 +24,7 @@ public class ProjectSecurityConfig {
         return httpSecurity.build();
     }
 
+    /*
     @Bean
     ClientRegistrationRepository clientRegistrationRepository(){
         ClientRegistration github = gitHubClientRegistration();
@@ -35,6 +36,8 @@ public class ProjectSecurityConfig {
         return CommonOAuth2Provider.GITHUB.getBuilder("github")
                 .clientId("Ov23li11EMCf7sdvKQd5").clientSecret("fddc9c9a88200843cdd78ce07731a15d7aab43d8").build();
     }
+
+     */
 
 
 }

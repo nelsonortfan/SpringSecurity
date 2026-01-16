@@ -115,6 +115,7 @@ public class ProjectSecurityConfig {
                 .clientId("eazybankclient")
                 .clientSecret("{noop}Qw3rTy6UjMnB9zXcV2pL0sKjHn5TxQqB")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .redirectUri("https://oauth.pstmn.io/v1/callback")
@@ -126,6 +127,7 @@ public class ProjectSecurityConfig {
         RegisteredClient pkceClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("eazypublicclient")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.NONE)
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .redirectUri("https://oauth.pstmn.io/v1/callback")
@@ -182,7 +184,8 @@ public class ProjectSecurityConfig {
                     if (context.getAuthorizationGrantType().equals(AuthorizationGrantType.CLIENT_CREDENTIALS)) {
                         Set<String> roles = context.getClaims().build().getClaim("scope");
                         claims.put("roles", roles);
-                    } else if (context.getAuthorizationGrantType().equals(AuthorizationGrantType.AUTHORIZATION_CODE)) {
+                    } else if (context.getAuthorizationGrantType().equals(AuthorizationGrantType.AUTHORIZATION_CODE )
+                            || context.getAuthorizationGrantType().equals(AuthorizationGrantType.REFRESH_TOKEN)) {
                         Set<String> roles = AuthorityUtils.authorityListToSet(context.getPrincipal().getAuthorities())
                                 .stream()
                                 .map(c -> c.replaceFirst("^ROLE_", ""))
